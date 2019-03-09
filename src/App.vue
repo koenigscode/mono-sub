@@ -17,18 +17,20 @@
       <div class="mapping-container">
         <char-mapping v-for="(c, i) in chars" :key="i" :label="c" @mappingChange="mappingChange"></char-mapping>
       </div>
-      <div></div>
+      <frequency-rate label="label"></frequency-rate>
     </div>
   </div>
 </template>
 
 <script>
 import CharMapping from "./components/CharMapping.vue";
+import FrequencyRate from "./components/FrequencyRate.vue";
 
 export default {
   name: "app",
   components: {
-    CharMapping
+    CharMapping,
+    FrequencyRate
   },
   data() {
     return {
