@@ -1,10 +1,21 @@
 <template>
   <div id="app" class="h-full h-screen">
     <div class="container-grid h-full">
-      <textarea v-model="srcText" id="area-src" class="textarea h-full"></textarea>
-      <textarea id="area-tgt" class="textarea h-full" disabled></textarea>
+      <textarea
+        v-model="srcText"
+        id="area-src"
+        class="textarea h-full p-4"
+        placeholder="Type something..."
+      ></textarea>
+      <textarea
+        v-model="tgtText"
+        id="area-tgt"
+        class="textarea h-full p-4"
+        placeholder="This is where the output will appear"
+        disabled
+      ></textarea>
       <div class="mapping-container">
-        <char-mapping v-for="(c, i) in mapping" :key="i" :label="c"></char-mapping>
+        <char-mapping v-for="(c, i) in chars" :key="i" :label="c" @mappingChange="mappingChange"></char-mapping>
       </div>
       <div></div>
     </div>
@@ -22,13 +33,32 @@ export default {
   data() {
     return {
       srcText: "",
-      mapping: new Set()
+      tgtText: "",
+      chars: new Set(),
+      mapping: {}
     };
+  },
+  methods: {
+    mappingChange(key, val) {
+      this.mapping[key] = val;
+      this.updateOutput();
+    },
+    updateOutput() {
+      let s = "";
+      for (let c of this.srcText) {
+        if (c in this.mapping) {
+          s += this.mapping[c];
+        } else {
+          s += c;
+        }
+      }
+      this.tgtText = s;
+    }
   },
   watch: {
     srcText(str) {
-      this.mapping = new Set(str.split(""));
-      console.log(this.mapping.size);
+      this.chars = new Set(str.split(""));
+      this.updateOutput();
     }
   }
 };
@@ -53,6 +83,8 @@ textarea
   background $dark-lighter
   color $white
   resize none
+  &::placeholder
+    color $placeholder
 
 .container-grid 
   display grid

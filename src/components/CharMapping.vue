@@ -14,6 +14,15 @@ export default {
     return {
       input: this.value
     };
+  },
+  watch: {
+    input(val) {
+      if (val != undefined && val.trim().length != 0) {
+        // let obj = {};
+        // obj[this.label] = val.trim();
+        this.$emit("mappingChange", this.label, val.trim());
+      }
+    }
   }
 };
 </script>
