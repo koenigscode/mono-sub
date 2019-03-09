@@ -19,7 +19,12 @@ export default {
 </script>
 
 <style lang="stylus" scoped>
+@import "../styles/_variables.styl"
+span 
+  color $white
+
 input
   width 3rem
-  background gray
+  background $dark-light
+  color $white
 </style>

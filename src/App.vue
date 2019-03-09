@@ -35,20 +35,34 @@ export default {
 </script>
 
 <style lang="stylus" scoped>
+@import "./styles/_variables.styl"
 #app 
   font-family 'Avenir', Helvetica, Arial, sans-serif
   -webkit-font-smoothing antialiased
   -moz-osx-font-smoothing grayscale
   text-align: center
+  background $dark
+  color $white
+  caret-color $green
+
+  *:focus 
+    outline-color $accent
+    
+
+textarea
+  background $dark-lighter
+  color $white
+  resize none
 
 .container-grid 
   display grid
   grid-template-columns 1fr 1fr
+  column-gap 5px
   min-height 30rem
 
 .mapping-container
   display grid
-  git grid-template-columns 1fr 1fr 1fr
+  grid-template-columns 1fr 1fr 1fr
   grid-auto-rows minmax(min-content, max-content)
 
   @media (min-width 768px)
@@ -56,9 +70,5 @@ export default {
 
   @media (min-width 1200px)
     grid-template-columns 1fr 1fr 1fr 1fr 1fr 1fr 1fr
-  
-
-textarea:disabled
-  background-color white
 
 </style>
