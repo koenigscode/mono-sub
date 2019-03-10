@@ -19,7 +19,7 @@
       </div>
       <div class="freq-container">
         <frequency-rate label="Buchstabenhäufigkeit im deutschen Alphabet" :chartData="gerFreq"></frequency-rate>
-        <frequency-rate label="Buchstabenhäufigkeit im deutschen Alphabet" :chartData="gerFreq"></frequency-rate>
+        <frequency-rate label="Zeichenhäufigkeit im eingegebenen Text" :chartData="srcFreq"></frequency-rate>
       </div>
     </div>
   </div>
@@ -40,10 +40,21 @@ export default {
     return {
       srcText: "",
       tgtText: "",
-      chars: new Set(),
       mapping: {},
       gerFreq
     };
+  },
+  computed: {
+    srcFreq() {
+      let freq = {};
+      for (let c of this.chars) {
+        freq[c] = this.srcText.split(c).length - 1 / this.srcText.length;
+      }
+      return freq;
+    },
+    chars() {
+      return new Set(this.srcText.split(""));
+    }
   },
   methods: {
     mappingChange(key, val) {
@@ -64,9 +75,7 @@ export default {
   },
   watch: {
     srcText(str) {
-      this.chars = new Set(str.split(""));
       this.updateOutput();
-      this.$set(this.gerFreq, "test", 2);
     }
   }
 };

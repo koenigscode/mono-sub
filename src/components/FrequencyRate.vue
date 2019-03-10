@@ -59,14 +59,21 @@ export default {
   },
   watch: {
     chartData() {
-      console.log("update")
-      this.chart.data.labels = this.labels;
-      this.chart.data.datasets[0].data = this.values;
-      this.chart.update();
+      if (this.chart == null) {
+        this.createChart(this.$refs.canvas.getContext("2d"));
+      } else if (Object.keys(this.chartData).length == 0) {
+        this.chart.destroy();
+        this.chart = null;
+      } else {
+        this.chart.data.labels = this.labels;
+        this.chart.data.datasets[0].data = this.values;
+        this.chart.update();
+      }
     }
   },
   mounted() {
-    this.createChart(this.$refs.canvas.getContext("2d"));
+    if (Object.keys(this.chartData).length > 0)
+      this.createChart(this.$refs.canvas.getContext("2d"));
   }
 };
 </script>
