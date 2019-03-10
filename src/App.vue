@@ -22,8 +22,16 @@
           @mappingChange="mappingChange"
         ></char-mapping>
       </div>
-      <frequency-rate title="Buchstabenhäufigkeit im deutschen Alphabet" :chartData="gerFreq"></frequency-rate>
-      <frequency-rate title="Zeichenhäufigkeit im eingegebenen Text" :chartData="srcFreq"></frequency-rate>
+      <frequency-rate
+        title="Buchstabenhäufigkeit im deutschen Alphabet"
+        :chartData="gerFreq"
+        :maxTick="maxTick"
+      ></frequency-rate>
+      <frequency-rate
+        title="Zeichenhäufigkeit im eingegebenen Text"
+        :chartData="srcFreq"
+        :maxTick="maxTick"
+      ></frequency-rate>
     </div>
   </div>
 </template>
@@ -73,6 +81,18 @@ export default {
           );
       }
       return s;
+    },
+    maxTick() {
+      if (this.srcFreq != undefined)
+        return (
+          2 *
+          Math.round(
+            Math.max(
+              ...Object.values(this.srcFreq),
+              ...Object.values(gerFreq)
+            ) / 2
+          )
+        );
     }
   },
   methods: {
@@ -131,10 +151,11 @@ textarea
 
 .container-grid 
   display grid
-  grid-template-columns 1fr 1fr
   // grid-template-rows 2fr 1fr 2fr
   grid-gap 1rem
   padding 1rem
+  @media (min-width 900px)
+    grid-template-columns 1fr 1fr
 
 .mapping-container
   grid-column 1/-1

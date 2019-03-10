@@ -8,7 +8,7 @@
 import colors from "@/colors.json";
 export default {
   name: "frequency-rate",
-  props: ["title", "chartData"],
+  props: ["title", "chartData", "maxTick"],
   data() {
     return {
       chart: null
@@ -82,17 +82,18 @@ export default {
                   labelString: "Häufigkeit in Prozent"
                 },
                 ticks: {
-                  beginAtZero: true
+                  beginAtZero: true,
+                  max: this.maxTick
                 }
               }
             ]
           }
         }
       });
-    }
-  },
-  watch: {
-    chartData() {
+    },
+    updateChart() {
+      console.log(Object.keys(this.chartData).length == 0);
+      console.log(this.chart);
       if (this.chart == null) {
         this.createChart(this.$refs.canvas.getContext("2d"));
       } else if (Object.keys(this.chartData).length == 0) {
@@ -101,8 +102,17 @@ export default {
       } else {
         this.chart.data.labels = this.labels;
         this.chart.data.datasets[0].data = this.values;
+        this.chart.options.scales.yAxes[0].ticks.max = this.maxTick;
         this.chart.update();
       }
+    }
+  },
+  watch: {
+    chartData() {
+      this.updateChart();
+    },
+    maxTick() {
+      this.updateChart();
     }
   },
   mounted() {
