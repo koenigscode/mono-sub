@@ -1,6 +1,6 @@
 <template>
-  <div class="container inline-block">
-    <div class="flex justify-between">
+  <div class="map-container inline-block">
+    <div class="map flex justify-between">
       <span class="mx-2 w-1/3 text-center">{{label}}:</span>
       <input class="w-2/3 text-center" v-model="input" type="text" maxlength="1">
     </div>
@@ -30,10 +30,16 @@ export default {
 <style lang="stylus" scoped>
 @import "../styles/_variables.styl"
 
-.container
+.map
   border-radius 0.2rem
   background $dark-lighter
   overflow hidden
+  transition background 0.2s
+
+.map
+  &:focus-within
+    // border: 1px solid $accent
+    background darken($accent, 15%)
 
 span 
   color $white
@@ -41,4 +47,7 @@ span
 input
   background $dark-light
   color $white
+  &:focus 
+    outline none
+
 </style>

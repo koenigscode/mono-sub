@@ -83,16 +83,13 @@ export default {
       return s;
     },
     maxTick() {
-      if (this.srcFreq != undefined)
-        return (
-          2 *
-          Math.round(
-            Math.max(
-              ...Object.values(this.srcFreq),
-              ...Object.values(gerFreq)
-            ) / 2
-          )
+      if (this.srcFreq != undefined) {
+        let maxVal = Math.max(
+          ...Object.values(this.srcFreq),
+          ...Object.values(gerFreq)
         );
+        return 2 * Math.round(Math.ceil(maxVal) / 2);
+      }
     }
   },
   methods: {
@@ -136,18 +133,19 @@ export default {
   background $dark
   color $white
   caret-color $green
-
-  *:focus 
-    outline-color $accent
     
 
 textarea
   background $dark-lighter
   color $white
   resize none
+  min-height: 30rem
+
   &::placeholder
     color $placeholder
-  min-height: 30rem
+  
+  :focus 
+    outline-color $accent
 
 .container-grid 
   display grid
