@@ -14,11 +14,30 @@ export default {
     };
   },
   computed: {
+    sortedData() {
+      let keys = Object.keys(this.chartData);
+      let values = Object.values(this.chartData);
+      let data = keys.map(function(e, i) {
+        return [e, values[i]];
+      });
+      data.sort((a, b) => {
+        return b[1] - a[1];
+      });
+      return data;
+    },
     labels() {
-      return Object.keys(this.chartData);
+      let arr = [];
+      for (let i of this.sortedData) {
+        arr.push(i[0]);
+      }
+      return arr;
     },
     values() {
-      return Object.values(this.chartData);
+      let arr = [];
+      for (let i of this.sortedData) {
+        arr.push(i[1]);
+      }
+      return arr;
     }
   },
   methods: {

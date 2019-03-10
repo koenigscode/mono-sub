@@ -50,6 +50,12 @@ export default {
       for (let c of this.chars) {
         freq[c] = this.srcText.split(c).length - 1 / this.srcText.length;
       }
+      const ordered = {};
+      Object.values(freq)
+        .sort()
+        .forEach(function(key) {
+          ordered[key] = freq[key];
+        });
       return freq;
     },
     chars() {
