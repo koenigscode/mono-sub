@@ -126,14 +126,13 @@ export default {
 <style lang="stylus" scoped>
 @import "./styles/_variables.styl"
 #app 
-  font-family 'Avenir', Helvetica, Arial, sans-serif
+  font-family: 'Lato', sans-serif;
   -webkit-font-smoothing antialiased
   -moz-osx-font-smoothing grayscale
   text-align: center
   background $dark
   color $white
   caret-color $green
-    
 
 textarea
   background $dark-lighter
