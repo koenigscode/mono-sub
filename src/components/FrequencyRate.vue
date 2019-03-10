@@ -7,10 +7,23 @@
 <script>
 export default {
   name: "frequency-rate",
-  props: ["label", "labels", "values"],
+  props: ["label", "chartData"],
+  data() {
+    return {
+      chart: null
+    };
+  },
+  computed: {
+    labels() {
+      return Object.keys(this.chartData);
+    },
+    values() {
+      return Object.values(this.chartData);
+    }
+  },
   methods: {
     createChart(ctx) {
-      let chart = new Chart(ctx, {
+      this.chart = new Chart(ctx, {
         type: "bar",
         data: {
           labels: this.labels,
@@ -42,6 +55,14 @@ export default {
           }
         }
       });
+    }
+  },
+  watch: {
+    chartData() {
+      console.log("update")
+      this.chart.data.labels = this.labels;
+      this.chart.data.datasets[0].data = this.values;
+      this.chart.update();
     }
   },
   mounted() {

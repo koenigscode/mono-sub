@@ -18,16 +18,8 @@
         <char-mapping v-for="(c, i) in chars" :key="i" :label="c" @mappingChange="mappingChange"></char-mapping>
       </div>
       <div class="freq-container">
-        <frequency-rate
-          label="Buchstabenhäufigkeit im deutschen Alphabet"
-          :labels="Object.keys(gerFreq)"
-          :values="Object.values(gerFreq)"
-        ></frequency-rate>
-        <frequency-rate
-          label="Buchstabenhäufigkeit im deutschen Alphabet"
-          :labels="Object.keys(gerFreq)"
-          :values="Object.values(gerFreq)"
-        ></frequency-rate>
+        <frequency-rate label="Buchstabenhäufigkeit im deutschen Alphabet" :chartData="gerFreq"></frequency-rate>
+        <frequency-rate label="Buchstabenhäufigkeit im deutschen Alphabet" :chartData="gerFreq"></frequency-rate>
       </div>
     </div>
   </div>
@@ -74,6 +66,7 @@ export default {
     srcText(str) {
       this.chars = new Set(str.split(""));
       this.updateOutput();
+      this.$set(this.gerFreq, "test", 2);
     }
   }
 };
