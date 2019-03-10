@@ -1,5 +1,5 @@
 <template>
-  <div id="app" class="h-full h-screen max-h-screen">
+  <div id="app" class="h-full min-h-screen w-full">
     <div class="container-grid h-full">
       <textarea
         v-model="srcText"
@@ -17,10 +17,8 @@
       <div class="mapping-container">
         <char-mapping v-for="(c, i) in chars" :key="i" :label="c" @mappingChange="mappingChange"></char-mapping>
       </div>
-      <div class="freq-container">
-        <frequency-rate title="Buchstabenhäufigkeit im deutschen Alphabet" :chartData="gerFreq"></frequency-rate>
-        <frequency-rate title="Zeichenhäufigkeit im eingegebenen Text" :chartData="srcFreq"></frequency-rate>
-      </div>
+      <frequency-rate title="Buchstabenhäufigkeit im deutschen Alphabet" :chartData="gerFreq"></frequency-rate>
+      <frequency-rate title="Zeichenhäufigkeit im eingegebenen Text" :chartData="srcFreq"></frequency-rate>
     </div>
   </div>
 </template>
@@ -128,21 +126,17 @@ textarea
 .container-grid 
   display grid
   grid-template-columns 1fr 1fr
-  grid-template-rows 40% 60%
+  grid-template-rows 2fr 1fr 2fr
   grid-gap 1rem
   min-height 30rem
   padding 1rem
 
 .mapping-container
+  grid-column 1/-1
   display grid
   grid-template-columns 1fr 1fr 1fr
   grid-auto-rows minmax(min-content, max-content)
   grid-template-columns repeat(auto-fit, minmax(8rem, 1fr))
   gap: 0.5rem
-
-.freq-container
-  display grid 
-  grid-template-rows 50% 50%
-  column-gap 1rem
 
 </style>
