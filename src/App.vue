@@ -18,8 +18,8 @@
         <char-mapping v-for="(c, i) in chars" :key="i" :label="c" @mappingChange="mappingChange"></char-mapping>
       </div>
       <div class="freq-container">
-        <frequency-rate label="Buchstabenhäufigkeit im deutschen Alphabet" :chartData="gerFreq"></frequency-rate>
-        <frequency-rate label="Zeichenhäufigkeit im eingegebenen Text" :chartData="srcFreq"></frequency-rate>
+        <frequency-rate title="Buchstabenhäufigkeit im deutschen Alphabet" :chartData="gerFreq"></frequency-rate>
+        <frequency-rate title="Zeichenhäufigkeit im eingegebenen Text" :chartData="srcFreq"></frequency-rate>
       </div>
     </div>
   </div>
@@ -29,6 +29,7 @@
 import CharMapping from "./components/CharMapping.vue";
 import FrequencyRate from "./components/FrequencyRate.vue";
 import gerFreq from "./data/frequency-german.json";
+import exampleText from "raw-loader!./data/esel.txt";
 
 export default {
   name: "app",
@@ -61,7 +62,14 @@ export default {
     },
     chars() {
       if (this.srcText.trim().length == 0) return [];
-      return new Set(this.srcText.split("").map(c => c.toUpperCase()));
+      let s = new Set();
+      for (let c of this.srcText.split("")) {
+        if (c.match(/^[0-9a-zA-Z]+$/))
+          s.add(
+            c in this.mapping ? this.mapping[c.toUpperCase()] : c.toUpperCase()
+          );
+      }
+      return s;
     }
   },
   methods: {
@@ -79,12 +87,18 @@ export default {
         }
       }
       this.tgtText = s;
+    },
+    loadExample() {
+      this.srcText = exampleText;
     }
   },
   watch: {
     srcText(str) {
       this.updateOutput();
     }
+  },
+  mounted() {
+    this.loadExample();
   }
 };
 </script>
@@ -123,12 +137,7 @@ textarea
   display grid
   grid-template-columns 1fr 1fr 1fr
   grid-auto-rows minmax(min-content, max-content)
-
-  @media (min-width 768px)
-    grid-template-columns 1fr 1fr 1fr 1fr 1fr
-
-  @media (min-width 1200px)
-    grid-template-columns 1fr 1fr 1fr 1fr 1fr 1fr 1fr
+  grid-template-columns repeat(auto-fit, minmax(8rem, 1fr))
 
 .freq-container
   display grid 

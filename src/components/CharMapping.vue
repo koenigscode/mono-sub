@@ -1,6 +1,6 @@
 <template>
   <div class="inline m-2">
-    <div class="flex justify-end">
+    <div class="flex justify-between">
       <span class="mx-2">{{label}}:</span>
       <input v-model="input" type="text">
     </div>

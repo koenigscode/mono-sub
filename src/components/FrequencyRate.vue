@@ -8,7 +8,7 @@
 import colors from "@/colors.json";
 export default {
   name: "frequency-rate",
-  props: ["label", "chartData"],
+  props: ["title", "chartData"],
   data() {
     return {
       chart: null
@@ -49,18 +49,26 @@ export default {
           labels: this.labels,
           datasets: [
             {
-              label: this.label,
               data: this.values,
               backgroundColor: colors.$accent + "40",
+              hoverBackgroundColor: colors.$accent + "60",
               borderColor: colors.$accent,
               borderWidth: 2
             }
           ]
         },
         options: {
+          legend: {
+            display: false
+          },
+          title: {
+            display: true,
+            text: this.title
+          },
           responsive: true,
           maintainAspectRatio: false,
           tooltips: {
+            displayColors: false,
             callbacks: {
               label: item =>
                 `Häufigkeit: ${Math.round(item.yLabel * 100) / 100}%`
