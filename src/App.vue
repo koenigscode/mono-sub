@@ -5,19 +5,23 @@
         v-model="srcText"
         id="area-src"
         class="textarea h-full p-4"
-        placeholder="Type something..."
+        placeholder="Erwarte Eingabe.."
       ></textarea>
       <textarea
         v-model="tgtText"
         id="area-tgt"
         class="textarea h-full p-4"
-        placeholder="This is where the output will appear"
+        placeholder="Hier erscheint der Output.."
         disabled
       ></textarea>
       <div class="mapping-container">
         <char-mapping v-for="(c, i) in chars" :key="i" :label="c" @mappingChange="mappingChange"></char-mapping>
       </div>
-      <frequency-rate label="label"></frequency-rate>
+      <frequency-rate
+        label="Buchstabenhäufigkeit im deutschen Alphabet"
+        :labels="Object.keys(gerFreq)"
+        :values="Object.values(gerFreq)"
+      ></frequency-rate>
     </div>
   </div>
 </template>
@@ -25,6 +29,7 @@
 <script>
 import CharMapping from "./components/CharMapping.vue";
 import FrequencyRate from "./components/FrequencyRate.vue";
+import gerFreq from "./data/frequency-german.json";
 
 export default {
   name: "app",
@@ -37,7 +42,8 @@ export default {
       srcText: "",
       tgtText: "",
       chars: new Set(),
-      mapping: {}
+      mapping: {},
+      gerFreq
     };
   },
   methods: {
@@ -91,8 +97,10 @@ textarea
 .container-grid 
   display grid
   grid-template-columns 1fr 1fr
-  column-gap 5px
+  grid-template-rows 40% 60%
+  grid-gap 10px
   min-height 30rem
+  padding 10px
 
 .mapping-container
   display grid
