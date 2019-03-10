@@ -138,6 +138,7 @@ textarea
   grid-template-columns 1fr 1fr 1fr
   grid-auto-rows minmax(min-content, max-content)
   grid-template-columns repeat(auto-fit, minmax(8rem, 1fr))
+  gap: 0.5rem
 
 .freq-container
   display grid 

@@ -1,8 +1,8 @@
 <template>
-  <div class="inline m-2">
+  <div class="container inline-block">
     <div class="flex justify-between">
-      <span class="mx-2">{{label}}:</span>
-      <input v-model="input" type="text">
+      <span class="mx-2 w-1/3">{{label}}:</span>
+      <input class="w-2/3" v-model="input" type="text" maxlength="1">
     </div>
   </div>
 </template>
@@ -29,11 +29,16 @@ export default {
 
 <style lang="stylus" scoped>
 @import "../styles/_variables.styl"
+
+.container
+  border-radius 0.2rem
+  background $dark-lighter
+  overflow hidden
+
 span 
   color $white
 
 input
-  width 3rem
   background $dark-light
   color $white
 </style>
