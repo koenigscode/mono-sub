@@ -1,6 +1,6 @@
 <template>
-  <div id="canvas-wrapper">
-    <canvas id="canvas"></canvas>
+  <div ref="canvasWrapper">
+    <canvas ref="canvas"></canvas>
   </div>
 </template>
 
@@ -10,9 +10,9 @@ export default {
   props: ["label", "labels", "values"],
   methods: {
     updateCanvas() {
-      let canvas = document.getElementById("canvas");
+      let canvas = this.$refs.canvas;
       let ctx = canvas.getContext("2d");
-      let canvasWrapper = document.getElementById("canvas-wrapper");
+      let canvasWrapper = this.$refs.canvasWrapper;
 
       canvas.width = canvasWrapper.clientWidth;
       ctx.clearRect(0, 0, canvas.width, canvas.height);
