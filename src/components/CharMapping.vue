@@ -1,8 +1,8 @@
 <template>
   <div class="container inline-block">
     <div class="flex justify-between">
-      <span class="mx-2 w-1/3">{{label}}:</span>
-      <input class="w-2/3" v-model="input" type="text" maxlength="1">
+      <span class="mx-2 w-1/3 text-center">{{label}}:</span>
+      <input class="w-2/3 text-center" v-model="input" type="text" maxlength="1">
     </div>
   </div>
 </template>

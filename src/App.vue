@@ -1,6 +1,6 @@
 <template>
-  <div id="app" class="h-full min-h-screen w-full">
-    <div class="container-grid h-full">
+  <div id="app" class="h-full w-full">
+    <div class="container-grid min-h-screen h-full">
       <textarea
         v-model="srcText"
         id="area-src"
@@ -15,7 +15,12 @@
         disabled
       ></textarea>
       <div class="mapping-container">
-        <char-mapping v-for="(c, i) in chars" :key="i" :label="c" @mappingChange="mappingChange"></char-mapping>
+        <char-mapping
+          v-for="(c, i) in Array.from(chars).sort()"
+          :key="i"
+          :label="c"
+          @mappingChange="mappingChange"
+        ></char-mapping>
       </div>
       <frequency-rate title="Buchstabenhäufigkeit im deutschen Alphabet" :chartData="gerFreq"></frequency-rate>
       <frequency-rate title="Zeichenhäufigkeit im eingegebenen Text" :chartData="srcFreq"></frequency-rate>
@@ -78,8 +83,8 @@ export default {
     updateOutput() {
       let s = "";
       for (let c of this.srcText) {
-        if (c in this.mapping) {
-          s += this.mapping[c];
+        if (c.toUpperCase() in this.mapping) {
+          s += this.mapping[c.toUpperCase()];
         } else {
           s += c;
         }
@@ -122,21 +127,22 @@ textarea
   resize none
   &::placeholder
     color $placeholder
+  min-height: 30rem
 
 .container-grid 
   display grid
   grid-template-columns 1fr 1fr
-  grid-template-rows 2fr 1fr 2fr
+  // grid-template-rows 2fr 1fr 2fr
   grid-gap 1rem
-  min-height 30rem
   padding 1rem
 
 .mapping-container
   grid-column 1/-1
   display grid
+  grid-auto-flow row
   grid-template-columns 1fr 1fr 1fr
   grid-auto-rows minmax(min-content, max-content)
-  grid-template-columns repeat(auto-fit, minmax(8rem, 1fr))
+  grid-template-columns repeat(auto-fit, 6rem)
   gap: 0.5rem
 
 </style>
