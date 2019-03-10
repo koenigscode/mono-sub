@@ -1,6 +1,6 @@
 <template>
-  <div ref="canvasWrapper">
-    <canvas ref="canvas"></canvas>
+  <div ref="canvasWrapper" class="h-full">
+    <canvas ref="canvas" class></canvas>
   </div>
 </template>
 
@@ -9,14 +9,7 @@ export default {
   name: "frequency-rate",
   props: ["label", "labels", "values"],
   methods: {
-    updateCanvas() {
-      let canvas = this.$refs.canvas;
-      let ctx = canvas.getContext("2d");
-      let canvasWrapper = this.$refs.canvasWrapper;
-
-      canvas.width = canvasWrapper.clientWidth;
-      ctx.clearRect(0, 0, canvas.width, canvas.height);
-
+    createChart(ctx) {
       let chart = new Chart(ctx, {
         type: "bar",
         data: {
@@ -32,6 +25,8 @@ export default {
           ]
         },
         options: {
+          responsive: true,
+          maintainAspectRatio: false,
           scales: {
             yAxes: [
               {
@@ -50,8 +45,7 @@ export default {
     }
   },
   mounted() {
-    this.updateCanvas();
-    window.addEventListener("resize", this.updateCanvas, false);
+    this.createChart(this.$refs.canvas.getContext("2d"));
   }
 };
 </script>
