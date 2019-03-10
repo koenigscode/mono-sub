@@ -48,7 +48,8 @@ export default {
     srcFreq() {
       let freq = {};
       for (let c of this.chars) {
-        freq[c] = this.srcText.split(c).length - 1 / this.srcText.length;
+        let count = this.srcText.toUpperCase().split(c).length - 1;
+        freq[c] = (count / this.srcText.length) * 100;
       }
       const ordered = {};
       Object.values(freq)
@@ -59,7 +60,8 @@ export default {
       return freq;
     },
     chars() {
-      return new Set(this.srcText.split(""));
+      if (this.srcText.trim().length == 0) return [];
+      return new Set(this.srcText.split("").map(c => c.toUpperCase()));
     }
   },
   methods: {

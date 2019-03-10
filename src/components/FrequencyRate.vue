@@ -5,6 +5,7 @@
 </template>
 
 <script>
+import colors from "@/colors.json";
 export default {
   name: "frequency-rate",
   props: ["label", "chartData"],
@@ -50,8 +51,8 @@ export default {
             {
               label: this.label,
               data: this.values,
-              backgroundColor: "rgba(54, 162, 235, 0.2)",
-              borderColor: "rgba(54, 162, 235, 1)",
+              backgroundColor: colors.$accent + "40",
+              borderColor: colors.$accent,
               borderWidth: 2
             }
           ]
@@ -59,6 +60,12 @@ export default {
         options: {
           responsive: true,
           maintainAspectRatio: false,
+          tooltips: {
+            callbacks: {
+              label: item =>
+                `Häufigkeit: ${Math.round(item.yLabel * 100) / 100}%`
+            }
+          },
           scales: {
             yAxes: [
               {
