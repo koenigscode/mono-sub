@@ -66,7 +66,6 @@ export default {
             text: this.title
           },
           responsive: true,
-          maintainAspectRatio: false,
           tooltips: {
             displayColors: false,
             callbacks: {
