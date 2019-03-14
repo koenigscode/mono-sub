@@ -22,23 +22,23 @@
           @mappingChange="mappingChange"
         ></char-mapping>
       </div>
-      <frequency-rate
+      <frequency-chart
         title="Buchstabenhäufigkeit im deutschen Alphabet"
         :chartData="gerFreq"
         :maxTick="maxTick"
-      ></frequency-rate>
-      <frequency-rate
+      ></frequency-chart>
+      <frequency-chart
         title="Zeichenhäufigkeit im eingegebenen Text"
         :chartData="srcFreq"
         :maxTick="maxTick"
-      ></frequency-rate>
+      ></frequency-chart>
     </div>
   </div>
 </template>
 
 <script>
 import CharMapping from "./components/CharMapping.vue";
-import FrequencyRate from "./components/FrequencyRate.vue";
+import FrequencyChart from "./components/FrequencyChart.vue";
 import gerFreq from "./data/frequency-german.json";
 import exampleText from "raw-loader!./data/esel.txt";
 
@@ -46,7 +46,7 @@ export default {
   name: "app",
   components: {
     CharMapping,
-    FrequencyRate
+    FrequencyChart
   },
   data() {
     return {

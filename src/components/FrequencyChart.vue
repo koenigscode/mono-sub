@@ -7,7 +7,7 @@
 <script>
 import colors from "@/colors.json";
 export default {
-  name: "frequency-rate",
+  name: "frequency-chart",
   props: ["title", "chartData", "maxTick"],
   data() {
     return {
