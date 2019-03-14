@@ -23,7 +23,7 @@
         ></char-mapping>
       </div>
       <frequency-chart
-        title="Buchstabenhäufigkeit im deutschen Alphabet"
+        title="Durchschnittliche Buchstabenhäufigkeit in deutschen Texten"
         :chartData="gerFreq"
         :maxTick="maxTick"
       ></frequency-chart>
@@ -151,7 +151,7 @@ textarea
   // grid-template-rows 2fr 1fr 2fr
   grid-gap 1rem
   padding 1rem
-  @media (min-width 900px)
+  @media (min-width 1000px)
     grid-template-columns 1fr 1fr
 
 .mapping-container
