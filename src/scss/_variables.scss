@@ -7,3 +7,9 @@ $green: #41b883;
 
 $accent: $green;
 $placeholder: #bbb;
+
+:export {
+  white: $white;
+  dark: $dark;
+  accent: $green;
+}

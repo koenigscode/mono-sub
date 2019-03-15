@@ -14,13 +14,16 @@ textarea {
   color: $white;
   resize: none;
   min-height: 30rem;
+
+  &::placeholder {
+    color: $placeholder;
+  }
+
+  &:focus {
+    outline-color: $green;
+  }
 }
-textarea::placeholder {
-  color: $placeholder;
-}
-textarea :focus {
-  outline-color: $accent;
-}
+
 .container-grid {
   display: grid;
   grid-gap: 1rem;
