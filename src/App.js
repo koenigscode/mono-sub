@@ -4,6 +4,8 @@ import "./App.scss";
 import FrequencyChart from "./components/FrequencyChart/FrequencyChart";
 import CharMapping from "./components/CharMapping/CharMapping";
 import gerFreq from "./data/frequency-german.json";
+// eslint-disable-next-line import/no-webpack-loader-syntax
+import exampleText from "!!raw-loader!./data/esel.txt";
 
 class App extends Component {
   constructor(props) {
@@ -34,12 +36,9 @@ class App extends Component {
     if (this.state.srcText.trim().length === 0) return [];
     let s = new Set();
     for (let c of this.state.srcText.split("")) {
+      c = c.toUpperCase();
       if (c.match(/^[0-9a-zA-Z]+$/))
-        s.add(
-          c in this.state.mapping
-            ? this.state.mapping[c.toUpperCase()]
-            : c.toUpperCase()
-        );
+        s.add(c in this.state.mapping ? this.state.mapping[c] : c);
     }
     return s;
   }
@@ -55,8 +54,9 @@ class App extends Component {
   }
 
   handleMappingChange(key, val) {
-    this.state.mapping[key] = val;
-    this.updateOutput();
+    this.setState({ mapping: { ...this.state.mapping, [key]: val } }, () =>
+      this.updateOutput()
+    );
   }
 
   updateOutput() {
@@ -72,10 +72,16 @@ class App extends Component {
   }
 
   loadExample() {
-    this.setState({ srcText: "exampleText" });
+    this.setState({ srcText: exampleText });
   }
 
-  onChange = (prop, e) => this.setState({ [prop]: e.target.value });
+  componentDidMount() {
+    this.loadExample();
+  }
+
+  onChange = (prop, e, callback) => {
+    this.setState({ [prop]: e.target.value }, callback);
+  };
 
   render() {
     return (
@@ -86,7 +92,9 @@ class App extends Component {
             value={this.state.srcText}
             placeholder="Erwarte Eingabe.."
             className="textarea h-full p-4"
-            onChange={e => this.onChange("srcText", e)}
+            onChange={e => {
+              this.onChange("srcText", e, this.updateOutput);
+            }}
           />
           <textarea
             ref="area-tgt"
