@@ -1,7 +1,8 @@
 import React, { Component } from "react";
-import "./components/FrequencyChart.js";
+import "./components/FrequencyChart/FrequencyChart.js";
 import "./App.scss";
-import FrequencyChart from "./components/FrequencyChart";
+import FrequencyChart from "./components/FrequencyChart/FrequencyChart";
+import CharMapping from "./components/CharMapping/CharMapping";
 import gerFreq from "./data/frequency-german.json";
 
 class App extends Component {
@@ -53,7 +54,7 @@ class App extends Component {
     }
   }
 
-  mappingChange(key, val) {
+  handleMappingChange(key, val) {
     this.state.mapping[key] = val;
     this.updateOutput();
   }
@@ -96,7 +97,17 @@ class App extends Component {
             maxtick={this.state.maxTick}
             disabled
           />
-          <div className="mapping-container" />
+          <div className="mapping-container">
+            {Array.from(this.chars)
+              .sort()
+              .map((c, i) => (
+                <CharMapping
+                  label={c}
+                  key={i}
+                  onMappingChange={this.handleMappingChange.bind(this)}
+                />
+              ))}
+          </div>
           <FrequencyChart
             title="Durchschnittliche Buchstabenhäufigkeit in deutschen Texten"
             chartdata={gerFreq}

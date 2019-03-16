@@ -1,6 +1,6 @@
 import React, { Component } from "react";
 import "./FrequencyChart.scss";
-import colors from "../scss/_variables.scss";
+import colors from "../../scss/_variables.scss";
 
 class FrequencyChart extends Component {
   constructor(props) {
