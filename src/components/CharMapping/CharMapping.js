@@ -11,7 +11,8 @@ class CharMapping extends Component {
 
   onChange = (prop, e) => {
     this.setState({ [prop]: e.target.value }, () => {
-      this.props.onMappingChange(this.props.label, this.state.input.trim());
+      let val = this.state.input.trim() === "" ? null : this.state.input;
+      this.props.onMappingChange(this.props.label, val);
     });
   };
 

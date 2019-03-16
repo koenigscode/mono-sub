@@ -36,9 +36,7 @@ class App extends Component {
     if (this.state.srcText.trim().length === 0) return [];
     let s = new Set();
     for (let c of this.state.srcText.split("")) {
-      c = c.toUpperCase();
-      if (c.match(/^[0-9a-zA-Z]+$/))
-        s.add(c in this.state.mapping ? this.state.mapping[c] : c);
+      if (c.match(/^[0-9a-zA-Z]+$/)) s.add(c.toUpperCase());
     }
     return s;
   }
@@ -62,7 +60,10 @@ class App extends Component {
   updateOutput() {
     let s = "";
     for (let c of this.state.srcText) {
-      if (c.toUpperCase() in this.state.mapping) {
+      if (
+        c.toUpperCase() in this.state.mapping &&
+        this.state.mapping[c.toUpperCase()] != null
+      ) {
         s += this.state.mapping[c.toUpperCase()];
       } else {
         s += c;
@@ -72,7 +73,7 @@ class App extends Component {
   }
 
   loadExample() {
-    this.setState({ srcText: exampleText });
+    this.setState({ srcText: exampleText }, this.updateOutput);
   }
 
   componentDidMount() {
@@ -80,7 +81,7 @@ class App extends Component {
   }
 
   onChange = (prop, e, callback) => {
-    this.setState({ [prop]: e.target.value }, callback);
+    this.setState({ [prop]: e.target.value });
   };
 
   render() {
@@ -88,7 +89,6 @@ class App extends Component {
       <div className="app h-full w-full">
         <div className="container-grid min-h-screen h-full">
           <textarea
-            ref="area-src"
             value={this.state.srcText}
             placeholder="Erwarte Eingabe.."
             className="textarea h-full p-4"
@@ -97,7 +97,6 @@ class App extends Component {
             }}
           />
           <textarea
-            ref="area-tgt"
             value={this.state.tgtText}
             className="textarea h-full p-4"
             placeholder="Hier erscheint der Output.."
