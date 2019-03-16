@@ -121,11 +121,13 @@ class App extends Component {
                 />
               ))}
           </div>
-          <FrequencyChart
-            title="Zeichenhäufigkeit im eingegebenen Text"
-            chartdata={this.srcFreq}
-            maxtick={this.maxTick}
-          />
+          {this.state.srcText.trim() !== "" && (
+            <FrequencyChart
+              title="Zeichenhäufigkeit im eingegebenen Text"
+              chartdata={this.srcFreq}
+              maxtick={this.maxTick}
+            />
+          )}
           <FrequencyChart
             title="Durchschnittliche Buchstabenhäufigkeit in deutschen Texten"
             chartdata={gerFreq}
