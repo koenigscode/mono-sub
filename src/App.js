@@ -36,7 +36,12 @@ class App extends Component {
         items.push(c);
       }
     }
-    return items;
+
+    return items.length > 0 ? (
+      items
+    ) : (
+      <span className="placeholder">Hier erscheint die Ausgabe..</span>
+    );
   }
 
   get srcFreq() {
@@ -71,6 +76,7 @@ class App extends Component {
       );
       return 2 * Math.round(Math.ceil(maxVal) / 2);
     }
+    return Math.max(Object.values(gerFreq));
   }
 
   handleMappingChange(key, val) {
