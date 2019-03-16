@@ -1,15 +1,21 @@
 $white: #eeeeee;
-$dark: #232323;
-$dark-lighter: #282828;
-$dark-light: #363636;
+$black: #232323;
+$black-blue: darken(#2f3640, 5%);
 
+$tamarind: #2e112d;
 $green: #41b883;
+$blue: #4e6a8c;
+$brick-red: #c9283e;
 
-$accent: $green;
+$accent: $brick-red;
 $placeholder: #bbb;
+
+$dark: $black-blue;
+$dark-lighter: lighten($dark, 2%);
+$dark-light: lighten($dark, 6%);
 
 :export {
   white: $white;
   dark: $dark;
-  accent: $green;
+  accent: $accent;
 }

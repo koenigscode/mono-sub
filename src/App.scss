@@ -7,7 +7,7 @@
   text-align: center;
   background: $dark;
   color: $white;
-  caret-color: $green;
+  caret-color: $accent;
 }
 textarea {
   background: $dark-lighter;
@@ -20,7 +20,7 @@ textarea {
   }
 
   &:focus {
-    outline-color: $green;
+    outline-color: $accent;
   }
 }
 
