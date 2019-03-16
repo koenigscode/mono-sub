@@ -20,8 +20,14 @@ class CharMapping extends Component {
     return (
       <div className="map-container inline-block">
         <div className="map flex justify-between">
-          <span className="w-1/2 text-center">{this.props.label + ":"}</span>
+          <label
+            className="label w-1/2 text-center"
+            for={"input-" + this.props.label}
+          >
+            {this.props.label + ":"}
+          </label>
           <input
+            id={"input-" + this.props.label}
             className="w-1/2 text-center"
             value={this.input}
             onChange={e => this.onChange("input", e)}

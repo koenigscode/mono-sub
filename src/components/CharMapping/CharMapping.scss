@@ -4,22 +4,20 @@
   background: $dark-lighter;
   overflow: hidden;
   transition: background 0.2s;
-}
 
-.map {
   &:focus-within {
     background: darken($accent, 15%);
   }
-}
 
-span {
-  color: $white;
-}
+  .label {
+    color: $white;
+  }
 
-input {
-  background: $dark-light;
-  color: $white;
-  &:focus {
-    outline: none;
+  input {
+    background: $dark-light;
+    color: $white;
+    &:focus {
+      outline: none;
+    }
   }
 }
