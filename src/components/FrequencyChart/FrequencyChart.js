@@ -116,8 +116,11 @@ class FrequencyChart extends Component {
 
   render() {
     return (
-      <div ref={this.canvasWrapper} className="h-full overflow-hidden">
-        <canvas ref={this.canvas} />
+      <div
+        ref={this.canvasWrapper}
+        className="h-full flex justify-center overflow-hidden"
+      >
+        <canvas ref={this.canvas} className="max-w-5xl" />
       </div>
     );
   }
