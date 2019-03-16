@@ -9,12 +9,16 @@ class CharMapping extends Component {
     };
   }
 
-  onChange = (prop, e) => {
+  onChange(prop, e) {
     this.setState({ [prop]: e.target.value }, () => {
       let val = this.state.input.trim() === "" ? null : this.state.input;
       this.props.onMappingChange(this.props.label, val);
     });
-  };
+  }
+
+  componentWillUnmount() {
+    this.props.onMappingChange(this.props.label, null);
+  }
 
   render() {
     return (
