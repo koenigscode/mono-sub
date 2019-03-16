@@ -48,8 +48,8 @@ class FrequencyChart extends Component {
           datasets: [
             {
               data: this.props.values,
-              backgroundColor: colors.accent + "40",
-              hoverBackgroundColor: colors.accent + "60",
+              backgroundColor: colors.accent + "80",
+              hoverBackgroundColor: colors.accent + "A0",
               borderColor: colors.accent,
               borderWidth: 2
             }

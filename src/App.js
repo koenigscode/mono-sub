@@ -81,7 +81,7 @@ class App extends Component {
   }
 
   onChange = (prop, e, callback) => {
-    this.setState({ [prop]: e.target.value });
+    this.setState({ [prop]: e.target.value }, callback);
   };
 
   render() {
