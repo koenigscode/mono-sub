@@ -116,13 +116,13 @@ class App extends Component {
               ))}
           </div>
           <FrequencyChart
-            title="Durchschnittliche Buchstabenhäufigkeit in deutschen Texten"
-            chartdata={gerFreq}
+            title="Zeichenhäufigkeit im eingegebenen Text"
+            chartdata={this.srcFreq}
             maxtick={this.maxTick}
           />
           <FrequencyChart
-            title="Zeichenhäufigkeit im eingegebenen Text"
-            chartdata={this.srcFreq}
+            title="Durchschnittliche Buchstabenhäufigkeit in deutschen Texten"
+            chartdata={gerFreq}
             maxtick={this.maxTick}
           />
         </div>
