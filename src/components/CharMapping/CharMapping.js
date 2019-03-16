@@ -18,22 +18,27 @@ class CharMapping extends Component {
 
   render() {
     return (
-      <div className="map-container inline-block">
-        <div className="map flex justify-between">
-          <label
-            className="label w-1/2 text-center"
-            for={"input-" + this.props.label}
-          >
-            {this.props.label + ":"}
-          </label>
-          <input
-            id={"input-" + this.props.label}
-            className="w-1/2 text-center"
-            value={this.input}
-            onChange={e => this.onChange("input", e)}
-            type="text"
-            maxLength="1"
-          />
+      <div className="map-container relative inline-block">
+        <div className="map-wrapper">
+          <div className="map flex justify-between">
+            <label
+              className="label w-1/2 text-center"
+              for={"input-" + this.props.label}
+            >
+              {this.props.label + ":"}
+            </label>
+            <input
+              id={"input-" + this.props.label}
+              className="w-1/2 text-center"
+              value={this.input}
+              onChange={e => this.onChange("input", e)}
+              type="text"
+              maxLength="1"
+            />
+            {this.state.input.trim() !== "" && (
+              <span className="tickmark">&#10004;</span>
+            )}
+          </div>
         </div>
       </div>
     );
