@@ -9,11 +9,26 @@
   color: $white;
   caret-color: $accent;
 }
-textarea {
+
+.textarea {
   background: $dark-lighter;
   color: $white;
   resize: none;
   min-height: 30rem;
+  max-height: 400px;
+  overflow: auto;
+  line-height: 120%;
+  letter-spacing: 1px;
+
+  &-output {
+    color: darken($white, 20%);
+
+    .highlighted {
+      color: $white;
+      font-style: normal;
+      // text-decoration: underline;
+    }
+  }
 
   &::placeholder {
     color: $placeholder;

@@ -17,6 +17,28 @@ class App extends Component {
     };
   }
 
+  get formattedTgtText() {
+    let items = [];
+
+    for (let [i, c] of this.state.srcText.split("").entries()) {
+      if (c === "\n") {
+        items.push(<br key={i} />);
+      } else if (
+        c.toUpperCase() in this.state.mapping &&
+        this.state.mapping[c.toUpperCase()] != null
+      ) {
+        items.push(
+          <span key={i} className="highlighted">
+            {this.state.mapping[c.toUpperCase()]}
+          </span>
+        );
+      } else {
+        items.push(c);
+      }
+    }
+    return items;
+  }
+
   get srcFreq() {
     let freq = {};
     for (let c of this.chars) {
@@ -52,28 +74,11 @@ class App extends Component {
   }
 
   handleMappingChange(key, val) {
-    this.setState({ mapping: { ...this.state.mapping, [key]: val } }, () =>
-      this.updateOutput()
-    );
-  }
-
-  updateOutput() {
-    let s = "";
-    for (let c of this.state.srcText) {
-      if (
-        c.toUpperCase() in this.state.mapping &&
-        this.state.mapping[c.toUpperCase()] != null
-      ) {
-        s += this.state.mapping[c.toUpperCase()];
-      } else {
-        s += c;
-      }
-    }
-    this.setState({ tgtText: s });
+    this.setState({ mapping: { ...this.state.mapping, [key]: val } });
   }
 
   loadExample() {
-    this.setState({ srcText: exampleText }, this.updateOutput);
+    this.setState({ srcText: exampleText });
   }
 
   componentDidMount() {
@@ -93,17 +98,12 @@ class App extends Component {
             placeholder="Erwarte Eingabe.."
             className="textarea h-full p-4"
             onChange={e => {
-              this.onChange("srcText", e, this.updateOutput);
+              this.onChange("srcText", e);
             }}
           />
-          <textarea
-            value={this.state.tgtText}
-            className="textarea h-full p-4"
-            placeholder="Hier erscheint der Output.."
-            onChange={e => this.onChange("tgtText", e)}
-            maxtick={this.state.maxTick}
-            disabled
-          />
+          <div className="textarea textarea-output text-left h-full p-4">
+            {this.formattedTgtText}
+          </div>
           <div className="mapping-container">
             {Array.from(this.chars)
               .sort()
